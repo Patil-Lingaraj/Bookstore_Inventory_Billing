@@ -1,0 +1,31 @@
+﻿using BookStore.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace BookStore
+{
+    static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmlogin());
+        }
+    }
+
+    internal class frmUsers : Form
+    {
+    }
+
+    internal class frmLogin : Form
+    {
+    }
+}
