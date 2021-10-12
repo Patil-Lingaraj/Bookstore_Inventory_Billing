@@ -29,9 +29,9 @@ namespace BookStore.DLL
                 //Writing SQL Query to get all the data from Database
                 string sql = "SELECT * FROM tbl_categories";
 
-                SqlCommand cmd = new SqlCommand();
+                SqlCommand cmd = new SqlCommand(sql, conn);
 
-                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 //open Database Connection
                 conn.Open();
 
@@ -209,6 +209,42 @@ namespace BookStore.DLL
             }
 
             return isSuccess;
+        }
+        #endregion
+        #region Method for Searh Funtionality
+        public DataTable Search(string keywords)
+        {
+            //SQL Connection For Database Connection
+            SqlConnection conn = new SqlConnection(myconnstrng);
+
+            //Creating Data TAble to hold the data from database temporarily
+            DataTable dt = new DataTable();
+
+            try
+            {
+                //SQL Query To Search Categories from DAtabase
+                String sql = "SELECT * FROM tbl_categories WHERE id LIKE '%" + keywords + "%' OR Book Genre ID LIKE '%" + keywords + "%' OR Book Genre Description LIKE '%" + keywords + "%'";
+                //Creating SQL Command to Execute the Query
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                //Getting DAta From DAtabase
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                //Open DatabaseConnection
+                conn.Open();
+                //Passing values from adapter to Data Table dt
+                adapter.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return dt;
         }
         #endregion
         #region Method for Searh Funtionality
