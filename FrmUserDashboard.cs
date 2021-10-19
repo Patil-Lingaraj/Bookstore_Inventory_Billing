@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,12 @@ namespace BookStore
         private void lblSubhead_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dealerAndCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeaCustfrm DealCust = new DeaCustfrm();
+            DealCust.Show();
         }
     }
 }

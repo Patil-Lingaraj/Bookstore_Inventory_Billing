@@ -54,5 +54,12 @@ namespace BookStore
             category.Show();
 
         }
+
+        private void dealerAndCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeaCustfrm DealCust = new DeaCustfrm();
+            DealCust.Show();
+
+        }
     }
 }
