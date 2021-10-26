@@ -27,7 +27,7 @@ namespace BookStore.DLL
             try 
             {
                 //Writing SQL Query to get all the data from Database
-                string sql = "SELECT * FROM tbl_categories";
+                string sql = "SELECT * FROM Book Genre";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -63,7 +63,7 @@ namespace BookStore.DLL
             try
             {
                 //Writing Query to Add New Catergory
-                string sql = "INSERT INTO tbl_categories (Book Genre ID, Book Genre Description, Added_Date, Added by Employee_ID) VALUES (@Book Genre ID, @Book Genre Description, @Added_Date, @Added by Employee_ID)";
+                string sql = "INSERT INTO Book Genre (Book Genre ID, Book Genre Description, Added_Date, Added by Employee_ID) VALUES (@Book Genre ID, @Book Genre Description, @Added_Date, @Added by Employee_ID)";
 
                 // Creating SQL Command to pass values in our query
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -120,7 +120,7 @@ namespace BookStore.DLL
             try
             {
                 //Query to Update Category
-                string sql = "UPDATE tbl_categories SET Book Genre ID=@Book Genre ID, Book Genre Description=@Book Genre Description, Added_Date=@Added_Date, Added by Employee_ID=@Added by Employee_ID WHERE id=@id";
+                string sql = "UPDATE Book Genre SET Book Genre ID=@Book Genre ID, Book Genre Description=@Book Genre Description, Added_Date=@Added_Date, Added by Employee_ID=@Added by Employee_ID WHERE id=@id";
 
                 //SQl Command to Pass the Value on Sql Query
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -175,7 +175,7 @@ namespace BookStore.DLL
             try
             {
                 //SQL Query to Delete from Database
-                string sql = "DELETE FROM tbl_categories WHERE id=@id";
+                string sql = "DELETE FROM Book Genre WHERE id=@id";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 //Passing the value using cmd
@@ -223,7 +223,7 @@ namespace BookStore.DLL
             try
             {
                 //SQL Query To Search Categories from DAtabase
-                String sql = "SELECT * FROM tbl_categories WHERE id LIKE '%" + keywords + "%' OR Book Genre ID LIKE '%" + keywords + "%' OR Book Genre Description LIKE '%" + keywords + "%'";
+                String sql = "SELECT * FROM Book Genre WHERE id LIKE '%" + keywords + "%' OR Book Genre ID LIKE '%" + keywords + "%' OR Book Genre Description LIKE '%" + keywords + "%'";
                 //Creating SQL Command to Execute the Query
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -259,7 +259,7 @@ namespace BookStore.DLL
             try
             {
                 //SQL Query To Search Categories from DAtabase
-                String sql = "SELECT * FROM tbl_categories WHERE id LIKE '%" + keywords + "%' OR Book Genre ID LIKE '%" + keywords + "%' OR Book Genre Description LIKE '%" + keywords + "%'";
+                String sql = "SELECT * FROM Book Genre WHERE id LIKE '%" + keywords + "%' OR Book Genre ID LIKE '%" + keywords + "%' OR Book Genre Description LIKE '%" + keywords + "%'";
                 //Creating SQL Command to Execute the Query
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
