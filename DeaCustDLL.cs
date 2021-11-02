@@ -206,5 +206,130 @@ namespace BookStore.DLL
             return isSuccess;
         }
         #endregion
+        #region SEARCH METHOD for Dealer and Customer Module
+        public DataTable Search(string keyword)
+        {
+            //Create a Sql Connection
+            SqlConnection conn = new SqlConnection(myconnstrng);
+
+            //Creating a Data TAble and returnign its value
+            DataTable dt = new DataTable();
+
+            try
+            {
+                //Write the Query to Search Dealer or Customer Based in id, type and name
+                string sql = "SELECT * FROM Custome/Dealer Details WHERE Customer_ID LIKE '%" + keyword + "%' OR Type LIKE '%" + keyword + "%' OR Name LIKE '%" + keyword + "%'";
+
+                //Sql Command to Execute the Query
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                //Sql Dat Adapeter to hold tthe data from dataase temporarily
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                //Open DAta Base Connection
+                conn.Open();
+                //Pass the value from adapter to data table
+                adapter.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return dt;
+        }
+        #endregion
+        #region METHOD TO SAERCH DEALER Or CUSTOMER FOR TRANSACTON MODULE
+        public DeaCustBLL SearchDealerCustomerForTransaction(string keyword)
+        {
+            //Create an object for DeaCustBLL class
+            DeaCustBLL dc = new DeaCustBLL();
+
+            //Create a DAtabase Connection
+            SqlConnection conn = new SqlConnection(myconnstrng);
+
+            //Create a DAta Table to hold the value temporarily
+            DataTable dt = new DataTable();
+
+            try
+            {
+                //Write a SQL Query to Search Dealer or Customer Based on Keywords
+                string sql = "SELECT Name, Email, Contact, Address from Customer/Dealer Details WHERE Customer_ID LIKE '%" + keyword + "%' OR Name LIKE '%" + keyword + "%'";
+
+                //Create a Sql Data Adapter to Execute the Query
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+
+                //Open the DAtabase Connection
+                conn.Open();
+
+                //Transfer the data from SqlData Adapter to DAta Table
+                adapter.Fill(dt);
+
+                //If we have values on dt we need to save it in dealerCustomer BLL
+                if (dt.Rows.Count > 0)
+                {
+                    dc.Name = dt.Rows[0]["Name"].ToString();
+                    dc.Email = dt.Rows[0]["Email"].ToString();
+                    dc.Contact = dt.Rows[0]["Contact"].ToString();
+                    dc.Address = dt.Rows[0]["Address"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //Close Database connection
+                conn.Close();
+            }
+
+            return dc;
+        }
+        #endregion
+        #region METHOD TO GET ID OF THE DEALER OR CUSTOMER BASED ON NAME
+        public DeaCustBLL GetDeaCustIDFromName(string Name)
+        {
+            //First Create an Object of DeaCust BLL and REturn it
+            DeaCustBLL dc = new DeaCustBLL();
+
+            //SQL Conection here
+            SqlConnection conn = new SqlConnection(myconnstrng);
+            //Data TAble to Holdthe data temporarily
+            DataTable dt = new DataTable();
+
+            try
+            {
+                //SQL Query to Get id based on Name
+                string sql = "SELECT Customer_ID FROM Customer/Dealer Details WHERE Name='" + Name + "'";
+                //Create the SQL Data Adapter to Execute the Query
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+
+                conn.Open();
+
+                //Passing the CAlue from Adapter to DAtatable
+                adapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    //Pass the value from dt to DeaCustBLL dc
+                    dc.Customer_ID = int.Parse(dt.Rows[0]["Customer_ID"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return dc;
+        }
+        #endregion
     }
 }
