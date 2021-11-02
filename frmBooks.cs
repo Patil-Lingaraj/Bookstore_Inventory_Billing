@@ -1,4 +1,5 @@
 ﻿using BookStore.BILL;
+using BookStore.DALL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,11 +29,6 @@ namespace BookStore.UI
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             //Add code to hide this form
@@ -42,6 +38,9 @@ namespace BookStore.UI
         booksBLL p = new booksBLL();
         booksDALL pdall = new booksDALL();
         userDALL udall = new userDALL();
+        private object pdal;
+        private object keywods;
+        private object dgvbooks;
 
         private void btnAdd_Click(object sender, EventArgs e)
 
@@ -173,6 +172,25 @@ namespace BookStore.UI
                 MessageBox.Show("Failed to Delete Book");
             }
 
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            //Get the keywords from From
+            string keywords=txtSearch.Text
+                if(keywods != null)
+            {
+                //Search the books
+                DataTable dt = pdal.Search(keywords);
+                dgvBooks.DataSource = dt;
+            }
+                else
+            {
+                //Display All the books
+                DataTable dt = pdal.Select();
+                dgvBooks.DataSource = dt;
+        
+            }
         }
     }
 }

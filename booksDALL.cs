@@ -1,8 +1,13 @@
-﻿using System;
+﻿using BookStore.BILL;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BookStore.DALL
 {
@@ -12,13 +17,13 @@ namespace BookStore.DALL
         static string myconnstrng = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
 
         #region Select method for Product Module
-        public DataTable Select()
+        public System.Data.DataTable Select()
         {
             //Create Sql Connection to connect Databaes
             SqlConnection conn = new SqlConnection(myconnstrng);
 
             //DAtaTable to hold the data from database
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new DataTable();
 
             try
             {
@@ -102,6 +107,11 @@ namespace BookStore.DALL
 
             return isSuccess;
         }
+
+        internal bool Insert(booksBLL p)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
         #region Method to Update Product in Database
         public bool Update(productsBLL p)
@@ -158,6 +168,16 @@ namespace BookStore.DALL
 
             return isSuccess;
         }
+
+        internal bool Delete(booksBLL p)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool Update(booksBLL p)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
         #region Method to Delete Product from Database
         public bool Delete(productsBLL p)
@@ -205,5 +225,40 @@ namespace BookStore.DALL
             }
 
             return isSuccess;
+        }
+        #endregion
+        #region SEARCH Method for Product Module
+        public DataTable Search(string keywords)
+        {
+            //SQL Connection fro DB Connection
+            SqlConnection conn = new SqlConnection(myconnstrng);
+            //Creating DAtaTable to hold value from dAtabase
+            DataTable dt = new DataTable();
+
+            try
+            {
+                //SQL query to search product
+                string sql = "SELECT * FROM tbl_products WHERE id LIKE '%" + keywords + "%' OR name LIKE '%" + keywords + "%' OR category LIKE '%" + keywords + "%'";
+                //Sql Command to execute Query
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                //SQL Data Adapter to hold the data from database temporarily
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                //Open Database Connection
+                conn.Open();
+
+                adapter.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return dt;
         }
     }
