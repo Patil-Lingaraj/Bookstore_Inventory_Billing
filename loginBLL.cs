@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.BILL
+namespace Bookstore___Invoice_System.Business_Logic_Layer
 {
     class loginBLL
     {
