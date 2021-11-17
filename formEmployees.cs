@@ -49,6 +49,7 @@ namespace Bookstore___Invoice_System.User_Interface
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            
             // get data from user interface
             employee.first_name = textBoxFirstName.Text;
             employee.last_name = textBoxLastName.Text;
@@ -60,7 +61,10 @@ namespace Bookstore___Invoice_System.User_Interface
             employee.gender = comboBoxGender.Text;
             employee.user_type = comboBoxUserType.Text;
             employee.added_date = DateTime.Now;
-            employee.added_by = 1;
+
+            string LoggedInUser = formLogin.logged_In_Employee;
+            employeeBLL user = dal.ObtainIDFromUsername(LoggedInUser);
+            employee.added_by =  user.id;
 
             // Put data into database
             bool success = dal.Insert(employee);
@@ -175,5 +179,7 @@ namespace Bookstore___Invoice_System.User_Interface
                 dataGridViewEmployees.DataSource = datatable;
             }
         }
+
+
     }
 }

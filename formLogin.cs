@@ -21,6 +21,7 @@ namespace Bookstore___Invoice_System.User_Interface
 
         loginBLL login = new loginBLL();
         loginDAL dal = new loginDAL();
+        public static string logged_In_Employee;
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -40,7 +41,7 @@ namespace Bookstore___Invoice_System.User_Interface
             {
                 //Login Successfull
                 MessageBox.Show("Login Successful!");
-              
+                logged_In_Employee = login.username;
                 switch (login.user_type)
                 {
                     case "Administrator":

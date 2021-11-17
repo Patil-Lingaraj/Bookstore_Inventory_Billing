@@ -20,7 +20,7 @@ namespace Bookstore___Invoice_System
 
         private void formAdminDashboard_Load(object sender, EventArgs e)
         {
-
+            labelLoggedInEmployee.Text = formLogin.logged_In_Employee;
         }
 
         private void labelSubHead_Click(object sender, EventArgs e)
@@ -37,6 +37,43 @@ namespace Bookstore___Invoice_System
         {
             formEmployees employee = new formEmployees();
             employee.Show();
+        }
+
+        private void formAdminDashboard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formLogin login = new formLogin();
+            login.Show();
+            this.Hide();
+        }
+
+        private void genreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formBookGenres genre = new formBookGenres();
+            genre.Show();
+        }
+
+        private void booksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formBooks book = new formBooks();
+            book.Show();
+        }
+
+        private void dealerAndCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formDealerCustomer dealerCustomer = new formDealerCustomer();
+            dealerCustomer.Show();
+        }
+
+        private void transactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formTransactions transaction = new formTransactions();
+            transaction.Show();
+        }
+
+        private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formInventory inventory = new formInventory();
+            inventory.Show();
         }
     }
 }

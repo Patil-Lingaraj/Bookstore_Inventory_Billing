@@ -214,5 +214,36 @@ namespace Bookstore___Invoice_System.Data_Access_Layer
             return datatable;
         }
         #endregion
+        #region Obtain Employee ID from Username
+        public employeeBLL ObtainIDFromUsername(string username)
+        {
+            employeeBLL employee = new employeeBLL();
+            SqlConnection connection = new SqlConnection(myconnectionstring);
+            DataTable datatable = new DataTable();
+
+            try
+            {
+                string sql = "SELECT id FROM table_employees WHERE username='" + username + "'";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                connection.Open();
+
+                adapter.Fill(datatable);
+                if (datatable.Rows.Count > 0)
+                {
+                    employee.id = int.Parse(datatable.Rows[0]["id"].ToString());
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return employee;
+        }
+        #endregion
     }
 }
